@@ -1,8 +1,10 @@
 #include "square.h"
 
 #include <cmath>
+#include <limits>
 #include <sstream>
 #include <stdexcept>
+#include <vector>
 
 namespace geometry {
 
@@ -14,10 +16,10 @@ Square::Square(const Point& first, const Point& second, const Point& third, cons
     }
 }
 
-Square::Square(double x1, double y1,
-               double x2, double y2,
-               double x3, double y3,
-               double x4, double y4) {
+Square::Square(const double x1, const double y1,
+               const double x2, const double y2,
+               const double x3, const double y3,
+               const double x4, const double y4) {
     vertices = {
         Point(x1, y1),
         Point(x2, y2),
@@ -33,6 +35,7 @@ Square::Square(double x1, double y1,
 double Square::getDistance(const Point& first, const Point& second) {
     const double dx = second.getX() - first.getX();
     const double dy = second.getY() - first.getY();
+
     return std::sqrt(dx * dx + dy * dy);
 }
 
@@ -41,15 +44,14 @@ bool Square::isValidSquare() const {
         return false;
     }
 
-    const double eps = 1e-9;
-
-    double side = getDistance(vertices[0], vertices[1]);
+    const double eps = std::numeric_limits<double>::epsilon();
+    const double side = getDistance(vertices[0], vertices[1]);
 
     if (side <= eps) {
         return false;
     }
 
-    for (int i = 0; i < VERTEX_COUNT; ++i) {
+    for (std::size_t i = 0; i < VERTEX_COUNT; ++i) {
         const Point& current = vertices[i];
         const Point& next = vertices[(i + 1) % VERTEX_COUNT];
         const Point& afterNext = vertices[(i + 2) % VERTEX_COUNT];
@@ -64,7 +66,6 @@ bool Square::isValidSquare() const {
         const double firstVectorY = next.getY() - current.getY();
         const double secondVectorX = afterNext.getX() - next.getX();
         const double secondVectorY = afterNext.getY() - next.getY();
-
         const double scalarProduct = firstVectorX * secondVectorX + firstVectorY * secondVectorY;
 
         if (std::abs(scalarProduct) > eps) {
@@ -79,7 +80,7 @@ std::string Square::ToString() const {
     std::stringstream stream;
     stream << "Square: ";
 
-    for (size_t i = 0; i < vertices.size(); ++i) {
+    for (std::size_t i = 0; i < vertices.size(); ++i) {
         stream << "v" << (i + 1) << "=" << vertices[i];
 
         if (i + 1 < vertices.size()) {
@@ -102,7 +103,7 @@ double Square::getPerimeter() const {
 
     double perimeter = 0.0;
 
-    for (int i = 0; i < VERTEX_COUNT; ++i) {
+    for (std::size_t i = 0; i < VERTEX_COUNT; ++i) {
         perimeter += getDistance(vertices[i], vertices[(i + 1) % VERTEX_COUNT]);
     }
 
@@ -117,7 +118,7 @@ double Square::getCircumradius() const {
 void Square::read(std::istream& is) {
     std::vector<Point> enteredVertices(VERTEX_COUNT);
 
-    for (int i = 0; i < VERTEX_COUNT; ++i) {
+    for (std::size_t i = 0; i < VERTEX_COUNT; ++i) {
         is >> enteredVertices[i];
     }
 
@@ -143,7 +144,7 @@ std::string Square::ToString(const Square& square) {
 Square Square::readFromStream(std::istream& is) {
     std::vector<Point> readVertices(VERTEX_COUNT);
 
-    for (int i = 0; i < VERTEX_COUNT; ++i) {
+    for (std::size_t i = 0; i < VERTEX_COUNT; ++i) {
         is >> readVertices[i];
     }
 

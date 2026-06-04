@@ -1,22 +1,19 @@
+#include "square.h"
+
 #include <clocale>
 #include <exception>
 #include <iostream>
 #include <memory>
 #include <vector>
 
-#include "square.h"
-
-void runUnitTests();
-
 /**
- * @brief точка входа в программу
- * @return 0, если программа выполнена успешно
+ * @brief Точка входа в демонстрационную программу.
+ * @return 0 в случае успешного выполнения программы.
  */
-int main(void) {
+int main() {
     setlocale(LC_ALL, "Russian");
 
     try {
-        runUnitTests();
         std::cout << "=== Демонстрация работы с классами Polygon и Square ===\n\n";
 
         std::cout << "1. Создание квадрата через точки:\n";
@@ -42,17 +39,17 @@ int main(void) {
 
         std::cout << "3. Коллекция объектов базового типа:\n";
         std::vector<std::unique_ptr<geometry::Polygon>> polygonList;
-
         polygonList.push_back(std::make_unique<geometry::Square>(firstSquare));
         polygonList.push_back(std::make_unique<geometry::Square>(secondSquare));
         polygonList.push_back(std::make_unique<geometry::Square>(5, 5, 5, 8, 8, 8, 8, 5));
 
         std::cout << "Итерация по коллекции:\n";
-        for (size_t index = 0; index < polygonList.size(); ++index) {
+
+        for (std::size_t index = 0; index < polygonList.size(); ++index) {
             std::cout << "Объект " << (index + 1) << ": " << *polygonList[index] << "\n";
-            std::cout << " Площадь: " << polygonList[index]->getArea() << "\n";
-            std::cout << " Периметр: " << polygonList[index]->getPerimeter() << "\n";
-            std::cout << " Радиус описанной окружности: " << polygonList[index]->getCircumradius() << "\n\n";
+            std::cout << "Площадь: " << polygonList[index]->getArea() << "\n";
+            std::cout << "Периметр: " << polygonList[index]->getPerimeter() << "\n";
+            std::cout << "Радиус описанной окружности: " << polygonList[index]->getCircumradius() << "\n\n";
         }
 
         std::cout << "4. Демонстрация операторов сравнения:\n";
@@ -67,6 +64,7 @@ int main(void) {
         std::cout << geometry::Square::ToString(firstSquare) << "\n\n";
 
         std::cout << "6. Попытка создания некорректного квадрата:\n";
+
         try {
             geometry::Square incorrectSquare(0, 0, 0, 2, 2, 2, 3, 0);
         }
@@ -80,5 +78,6 @@ int main(void) {
     }
 
     std::cout << "\nПрограмма завершена успешно.\n";
+
     return 0;
 }

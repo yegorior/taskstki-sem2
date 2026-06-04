@@ -16,5 +16,4 @@ std::string Polygon::ToString(const Polygon& polygon) {
     return polygon.ToString();
 }
 
-
 }
