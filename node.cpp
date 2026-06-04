@@ -1,3 +1,3 @@
 #include "node.h"
 
-Node::Node(int newValue) : value(newValue), next(nullptr) {}
+Node::Node(const int newValue) : value(newValue), next(nullptr) {}

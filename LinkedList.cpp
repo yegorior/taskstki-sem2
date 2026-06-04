@@ -1,9 +1,8 @@
 #include "LinkedList.h"
-
 #include <sstream>
 #include <stdexcept>
 
-Node* LinkedList::getNode(std::size_t index) const {
+Node* LinkedList::getNode(const std::size_t index) const {
     if (index >= count) {
         throw std::out_of_range("Индекс выходит за границы списка");
     }
@@ -30,13 +29,14 @@ void LinkedList::release() {
         delete first;
         first = nextNode;
     }
+
     count = 0;
 }
 
 LinkedList::LinkedList() : first(nullptr), count(0) {}
 
-LinkedList::LinkedList(std::initializer_list<int> values) : first(nullptr), count(0) {
-    for (int value : values) {
+LinkedList::LinkedList(const std::initializer_list<int> values) : first(nullptr), count(0) {
+    for (const int value : values) {
         push_back(value);
     }
 }
@@ -59,6 +59,7 @@ LinkedList& LinkedList::operator=(const LinkedList& other) {
         release();
         copyFrom(other);
     }
+
     return *this;
 }
 
@@ -70,10 +71,11 @@ LinkedList& LinkedList::operator=(LinkedList&& other) noexcept {
         other.first = nullptr;
         other.count = 0;
     }
+
     return *this;
 }
 
-void LinkedList::push_back(int value) {
+void LinkedList::push_back(const int value) {
     Node* createdNode = new Node(value);
 
     if (first == nullptr) {
@@ -89,14 +91,14 @@ void LinkedList::push_back(int value) {
     ++count;
 }
 
-void LinkedList::push_front(int value) {
+void LinkedList::push_front(const int value) {
     Node* createdNode = new Node(value);
     createdNode->next = first;
     first = createdNode;
     ++count;
 }
 
-void LinkedList::insert(std::size_t index, int value) {
+void LinkedList::insert(const std::size_t index, const int value) {
     if (index > count) {
         throw std::out_of_range("Позиция вставки выходит за границы списка");
     }
@@ -146,7 +148,7 @@ void LinkedList::pop_front() {
     --count;
 }
 
-void LinkedList::erase(std::size_t index) {
+void LinkedList::erase(const std::size_t index) {
     if (index >= count) {
         throw std::out_of_range("Индекс удаления выходит за границы списка");
     }
@@ -163,8 +165,8 @@ void LinkedList::erase(std::size_t index) {
     --count;
 }
 
-bool LinkedList::remove(int value) {
-    int position = find(value);
+bool LinkedList::remove(const int value) {
+    const int position = find(value);
     if (position == -1) {
         return false;
     }
@@ -173,7 +175,7 @@ bool LinkedList::remove(int value) {
     return true;
 }
 
-int LinkedList::find(int value) const {
+int LinkedList::find(const int value) const {
     Node* current = first;
     std::size_t index = 0;
 
@@ -188,19 +190,31 @@ int LinkedList::find(int value) const {
     return -1;
 }
 
-bool LinkedList::contains(int value) const {
+bool LinkedList::contains(const int value) const {
     return find(value) != -1;
 }
 
-void LinkedList::modify(std::size_t index, int value) {
+void LinkedList::modify(const std::size_t index, const int value) {
+    if (index >= count) {
+        throw std::out_of_range("Индекс изменения выходит за границы списка");
+    }
+
     getNode(index)->value = value;
 }
 
-int& LinkedList::operator[](std::size_t index) {
+int& LinkedList::operator[](const std::size_t index) {
+    if (index >= count) {
+        throw std::out_of_range("Индекс выходит за границы списка");
+    }
+
     return getNode(index)->value;
 }
 
-const int& LinkedList::operator[](std::size_t index) const {
+const int& LinkedList::operator[](const std::size_t index) const {
+    if (index >= count) {
+        throw std::out_of_range("Индекс выходит за границы списка");
+    }
+
     return getNode(index)->value;
 }
 
@@ -243,7 +257,6 @@ std::istream& operator>>(std::istream& in, LinkedList& list) {
     in >> amount;
 
     list.clear();
-
     for (std::size_t i = 0; i < amount; ++i) {
         int value;
         in >> value;

@@ -36,14 +36,13 @@ int main() {
     std::cout << "После удалений: " << numbers << "\n\n";
 
     std::cout << "6. Поиск и изменение значения:\n";
-    int searchedValue = 24;
-    int foundIndex = numbers.find(searchedValue);
+    const int searchedValue = 24;
+    const int foundIndex = numbers.find(searchedValue);
     if (foundIndex != -1) {
         std::cout << "Значение " << searchedValue << " найдено на позиции " << foundIndex << '\n';
     } else {
         std::cout << "Значение " << searchedValue << " не найдено\n";
     }
-
     numbers.modify(1, 99);
     std::cout << "После modify(1, 99): " << numbers << "\n\n";
 
