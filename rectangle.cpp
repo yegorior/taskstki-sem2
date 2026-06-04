@@ -12,13 +12,11 @@
 using namespace std;
 
 Rectangle::Rectangle()
-    : firstVertex(0, 0), secondVertex(1, 0), thirdVertex(1, 1), fourthVertex(0, 1)
-{
+    : firstVertex(0, 0), secondVertex(1, 0), thirdVertex(1, 1), fourthVertex(0, 1) {
 }
 
 Rectangle::Rectangle(const Point& pointA, const Point& pointB, const Point& pointC, const Point& pointD)
-    : firstVertex(pointA), secondVertex(pointB), thirdVertex(pointC), fourthVertex(pointD)
-{
+    : firstVertex(pointA), secondVertex(pointB), thirdVertex(pointC), fourthVertex(pointD) {
     sortPoints();
 
     if (!isRectangle()) {
@@ -27,8 +25,7 @@ Rectangle::Rectangle(const Point& pointA, const Point& pointB, const Point& poin
     }
 }
 
-bool Rectangle::isRectangle() const
-{
+bool Rectangle::isRectangle() const {
     double sideOne = firstVertex.distanceTo(secondVertex);
     double sideTwo = secondVertex.distanceTo(thirdVertex);
     double sideThree = thirdVertex.distanceTo(fourthVertex);
@@ -50,8 +47,7 @@ bool Rectangle::isRectangle() const
     return allSidesExist && oppositeSidesEqual && diagonalsEqual;
 }
 
-void Rectangle::sortPoints()
-{
+void Rectangle::sortPoints() {
     double middleX = (firstVertex.getX() + secondVertex.getX() + thirdVertex.getX() + fourthVertex.getX()) / 4.0;
     double middleY = (firstVertex.getY() + secondVertex.getY() + thirdVertex.getY() + fourthVertex.getY()) / 4.0;
 
@@ -80,53 +76,43 @@ void Rectangle::sortPoints()
     fourthVertex = rectanglePoints[3];
 }
 
-Point Rectangle::getP1() const
-{
+Point Rectangle::getP1() const {
     return firstVertex;
 }
 
-Point Rectangle::getP2() const
-{
+Point Rectangle::getP2() const {
     return secondVertex;
 }
 
-Point Rectangle::getP3() const
-{
+Point Rectangle::getP3() const {
     return thirdVertex;
 }
 
-Point Rectangle::getP4() const
-{
+Point Rectangle::getP4() const {
     return fourthVertex;
 }
 
-vector<Point> Rectangle::getAllPoints() const
-{
+vector<Point> Rectangle::getAllPoints() const {
     return { firstVertex, secondVertex, thirdVertex, fourthVertex };
 }
 
-double Rectangle::getWidth() const
-{
+double Rectangle::getWidth() const {
     return firstVertex.distanceTo(secondVertex);
 }
 
-double Rectangle::getHeight() const
-{
+double Rectangle::getHeight() const {
     return secondVertex.distanceTo(thirdVertex);
 }
 
-double Rectangle::getS() const
-{
+double Rectangle::getS() const {
     return getWidth() * getHeight();
 }
 
-double Rectangle::getPerimeter() const
-{
+double Rectangle::getPerimeter() const {
     return 2 * (getWidth() + getHeight());
 }
 
-std::ostream& operator<<(std::ostream& outputStream, const Rectangle& currentRectangle)
-{
+std::ostream& operator<<(std::ostream& outputStream, const Rectangle& currentRectangle) {
     outputStream << currentRectangle.firstVertex << " "
         << currentRectangle.secondVertex << " "
         << currentRectangle.thirdVertex << " "
@@ -135,8 +121,7 @@ std::ostream& operator<<(std::ostream& outputStream, const Rectangle& currentRec
     return outputStream;
 }
 
-std::istream& operator>>(std::istream& inputStream, Rectangle& currentRectangle)
-{
+std::istream& operator>>(std::istream& inputStream, Rectangle& currentRectangle) {
     inputStream >> currentRectangle.firstVertex
         >> currentRectangle.secondVertex
         >> currentRectangle.thirdVertex

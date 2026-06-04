@@ -2,87 +2,112 @@
 
 #include <iostream>
 #include <vector>
+
 #include "point.h"
 
-class Rectangle
-{
+/**
+ * @brief Класс прямоугольника, заданного четырьмя вершинами.
+ */
+class Rectangle {
 private:
     /**
-     * @brief вершины прямоугольника
+     * @brief Вершины прямоугольника.
      */
     Point firstVertex, secondVertex, thirdVertex, fourthVertex;
 
     /**
-     * @brief проверяет, образуют ли точки прямоугольник
-     * @return true, если точки образуют прямоугольник
+     * @brief Проверка, образуют ли вершины прямоугольник.
+     * @return true, если вершины образуют прямоугольник, иначе false.
      */
     bool isRectangle() const;
 
     /**
-     * @brief упорядочивает вершины вокруг центра фигуры
+     * @brief Сортировка вершин вокруг центра прямоугольника.
      */
     void sortPoints();
 
 public:
     /**
-     * @brief конструктор прямоугольника по умолчанию
+     * @brief Конструктор прямоугольника по умолчанию.
      */
     Rectangle();
 
     /**
-     * @brief конструктор прямоугольника по четырем точкам
-     * @param pointA - первая точка
-     * @param pointB - вторая точка
-     * @param pointC - третья точка
-     * @param pointD - четвертая точка
+     * @brief Конструктор, создающий прямоугольник по четырём точкам.
+     * @param pointA - первая вершина прямоугольника.
+     * @param pointB - вторая вершина прямоугольника.
+     * @param pointC - третья вершина прямоугольника.
+     * @param pointD - четвёртая вершина прямоугольника.
      */
     Rectangle(const Point& pointA, const Point& pointB, const Point& pointC, const Point& pointD);
 
     /**
-     * @brief возвращает первую вершину
+     * @brief Получение первой вершины прямоугольника.
+     * @return Первая вершина прямоугольника.
      */
     Point getP1() const;
 
     /**
-     * @brief возвращает вторую вершину
+     * @brief Получение второй вершины прямоугольника.
+     * @return Вторая вершина прямоугольника.
      */
     Point getP2() const;
 
     /**
-     * @brief возвращает третью вершину
+     * @brief Получение третьей вершины прямоугольника.
+     * @return Третья вершина прямоугольника.
      */
     Point getP3() const;
 
     /**
-     * @brief возвращает четвертую вершину
+     * @brief Получение четвёртой вершины прямоугольника.
+     * @return Четвёртая вершина прямоугольника.
      */
     Point getP4() const;
 
     /**
-     * @brief возвращает все вершины прямоугольника
+     * @brief Получение всех вершин прямоугольника.
+     * @return Вектор, содержащий четыре вершины прямоугольника.
      */
     std::vector<Point> getAllPoints() const;
 
     /**
-     * @brief вычисляет ширину прямоугольника
+     * @brief Вычисление ширины прямоугольника.
+     * @return Ширина прямоугольника.
      */
     double getWidth() const;
 
     /**
-     * @brief вычисляет высоту прямоугольника
+     * @brief Вычисление высоты прямоугольника.
+     * @return Высота прямоугольника.
      */
     double getHeight() const;
 
     /**
-     * @brief вычисляет площадь прямоугольника
+     * @brief Вычисление площади прямоугольника.
+     * @return Площадь прямоугольника.
      */
     double getS() const;
 
     /**
-     * @brief вычисляет периметр прямоугольника
+     * @brief Вычисление периметра прямоугольника.
+     * @return Периметр прямоугольника.
      */
     double getPerimeter() const;
 
+    /**
+     * @brief Оператор вывода прямоугольника в поток.
+     * @param outputStream - поток вывода.
+     * @param currentRectangle - прямоугольник, который нужно вывести.
+     * @return Ссылка на поток вывода.
+     */
     friend std::ostream& operator<<(std::ostream& outputStream, const Rectangle& currentRectangle);
+
+    /**
+     * @brief Оператор ввода прямоугольника из потока.
+     * @param inputStream - поток ввода.
+     * @param currentRectangle - прямоугольник, в который записываются введённые вершины.
+     * @return Ссылка на поток ввода.
+     */
     friend std::istream& operator>>(std::istream& inputStream, Rectangle& currentRectangle);
 };

@@ -1,16 +1,16 @@
 #include <clocale>
 #include <iostream>
+
 #include "point.h"
 #include "rectangle.h"
 
 using namespace std;
 
 /**
- * @brief точка входа в программу
- * @return 0 при корректном завершении программы
+ * @brief Точка входа в программу.
+ * @return 0 при корректном завершении программы.
  */
-int main()
-{
+int main() {
     setlocale(LC_ALL, "Russian");
 
     Point leftBottomPoint(0, 0);
@@ -24,7 +24,6 @@ int main()
     cout << "Площадь: " << firstRectangle.getS() << endl;
     cout << "Периметр: " << firstRectangle.getPerimeter() << endl;
     cout << "Ширина: " << firstRectangle.getWidth() << ", Высота: " << firstRectangle.getHeight() << endl;
-
     cout << endl;
 
     Rectangle secondRectangle;

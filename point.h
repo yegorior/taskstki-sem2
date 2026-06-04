@@ -2,53 +2,61 @@
 
 #include <iostream>
 
-class Point
-{
+/**
+ * @brief Класс точки на плоскости.
+ */
+class Point {
 private:
     /**
-     * @brief coordinateX - координата точки по оси OX
+     * @brief coordinateX - координата точки по оси OX.
      */
     double coordinateX;
 
     /**
-     * @brief coordinateY - координата точки по оси OY
+     * @brief coordinateY - координата точки по оси OY.
      */
     double coordinateY;
 
 public:
     /**
-     * @brief конструктор точки
-     * @param xValue - значение координаты по оси OX
-     * @param yValue - значение координаты по оси OY
+     * @brief Конструктор, создающий точку с заданными координатами.
+     * @param xValue - значение координаты точки по оси OX.
+     * @param yValue - значение координаты точки по оси OY.
      */
     Point(const double xValue = 0, const double yValue = 0);
 
     /**
-     * @brief возвращает координату x
-     * @return coordinateX
+     * @brief Получение координаты точки по оси OX.
+     * @return Значение координаты coordinateX.
      */
     double getX() const;
 
     /**
-     * @brief возвращает координату y
-     * @return coordinateY
+     * @brief Получение координаты точки по оси OY.
+     * @return Значение координаты coordinateY.
      */
     double getY() const;
 
     /**
-     * @brief вычисляет расстояние до другой точки
-     * @param anotherPoint - вторая точка
-     * @return расстояние между двумя точками
+     * @brief Вычисление расстояния до другой точки.
+     * @param anotherPoint - точка, до которой вычисляется расстояние.
+     * @return Расстояние между текущей точкой и другой точкой.
      */
     double distanceTo(const Point& anotherPoint) const;
 
     /**
-     * @brief оператор вывода точки
+     * @brief Оператор вывода точки в поток.
+     * @param outputStream - поток вывода.
+     * @param currentPoint - точка, которую нужно вывести.
+     * @return Ссылка на поток вывода.
      */
     friend std::ostream& operator<<(std::ostream& outputStream, const Point& currentPoint);
 
     /**
-     * @brief оператор ввода точки
+     * @brief Оператор ввода точки из потока.
+     * @param inputStream - поток ввода.
+     * @param currentPoint - точка, в которую записываются введённые координаты.
+     * @return Ссылка на поток ввода.
      */
     friend std::istream& operator>>(std::istream& inputStream, Point& currentPoint);
 };
