@@ -1,4 +1,5 @@
 #include "LinkedList.h"
+
 #include <sstream>
 #include <stdexcept>
 
@@ -17,6 +18,7 @@ Node* LinkedList::getNode(const std::size_t index) const {
 
 void LinkedList::copyFrom(const LinkedList& source) {
     Node* current = source.first;
+
     while (current != nullptr) {
         push_back(current->value);
         current = current->next;
@@ -167,6 +169,7 @@ void LinkedList::erase(const std::size_t index) {
 
 bool LinkedList::remove(const int value) {
     const int position = find(value);
+
     if (position == -1) {
         return false;
     }
@@ -183,6 +186,7 @@ int LinkedList::find(const int value) const {
         if (current->value == value) {
             return static_cast<int>(index);
         }
+
         current = current->next;
         ++index;
     }

@@ -6,7 +6,7 @@
 class Node {
 public:
     /**
-     * @brief Значение, которое хранится в узле списка.
+     * @brief Значение, хранящееся в узле.
      */
     int value;
 
@@ -16,8 +16,8 @@ public:
     Node* next;
 
     /**
-     * @brief Конструктор узла списка.
-     * @param newValue - значение, которое будет записано в узел.
+     * @brief Создаёт узел списка с заданным значением.
+     * @param newValue Значение, которое будет сохранено в узле.
      */
     explicit Node(const int newValue);
 };
